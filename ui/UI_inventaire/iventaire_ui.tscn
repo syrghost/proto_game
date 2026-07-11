@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://1yeqb8wa5vi4"]
+
+[ext_resource type="Script" uid="uid://d2sy6sbxffscj" path="res://ui/UI_inventaire/Onglet_inventaire.gd" id="1_4eqs6"]
+[ext_resource type="Script" uid="uid://bcx4m10s6bta7" path="res://ui/UI_inventaire/Iventaire_ui.gd" id="1_vcl0u"]
+
+[node name="IventaireUi" type="CanvasLayer" unique_id=803686246]
+script = ExtResource("1_vcl0u")
+
+[node name="Panel" type="Panel" parent="." unique_id=1254054910]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TabContainer" type="TabContainer" parent="Panel" unique_id=1429655351]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 40.0
+current_tab = 2
+
+[node name="Equipement" type="Control" parent="Panel/TabContainer" unique_id=717337046]
+visible = false
+layout_mode = 2
+script = ExtResource("1_4eqs6")
+metadata/_tab_index = 0
+
+[node name="GridContainer" type="GridContainer" parent="Panel/TabContainer/Equipement" unique_id=1287993775]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 5
+
+[node name="Consomable" type="Control" parent="Panel/TabContainer" unique_id=483772511]
+visible = false
+layout_mode = 2
+script = ExtResource("1_4eqs6")
+type_filtre = 1
+metadata/_tab_index = 1
+
+[node name="GridContainer" type="GridContainer" parent="Panel/TabContainer/Consomable" unique_id=1813467180]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 5
+
+[node name="Objet_clef" type="Control" parent="Panel/TabContainer" unique_id=1901540196]
+layout_mode = 2
+script = ExtResource("1_4eqs6")
+type_filtre = 3
+metadata/_tab_index = 2
+
+[node name="GridContainer" type="GridContainer" parent="Panel/TabContainer/Objet_clef" unique_id=1425305886]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 5

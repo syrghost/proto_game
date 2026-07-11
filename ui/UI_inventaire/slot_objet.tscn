@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://1beri3stxetx"]
+
+[ext_resource type="Script" uid="uid://bhfojd74f7xhq" path="res://ui/UI_inventaire/slot_objet.gd" id="1_3mexh"]
+
+[node name="Slot_objet" type="TextureButton" unique_id=151718679]
+custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_3mexh")
+
+[node name="Icone" type="TextureRect" parent="." unique_id=489520886]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Quantiter" type="Label" parent="." unique_id=2022040710]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="menu_contextuelle" type="PopupMenu" parent="." unique_id=692428444]
+oversampling_override = 1.0
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

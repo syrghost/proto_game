@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Arme" format=3 uid="uid://bummd88jo1dg8"]
+
+[ext_resource type="PackedScene" uid="uid://bvle46murftho" path="res://Arme/Scene_arme/model_3D_arme/epee_2.tscn" id="1_hnn3c"]
+[ext_resource type="Script" uid="uid://h664u668ogi7" path="res://Arme/Arme.gd" id="1_nn7r2"]
+[ext_resource type="Texture2D" uid="uid://d0rcalqb51w7x" path="res://Assets/Arme_test/autumn_sword_0.png" id="1_t0k0u"]
+
+[resource]
+script = ExtResource("1_nn7r2")
+degats = 500
+vitesse_attaque = 3.0
+scene_modele = ExtResource("1_hnn3c")
+chemin_scene_monde = "res://Arme/Scene_arme/poser_au_sol/epee_2_test.tscn"
+id = "9"
+nom = "epee celeste"
+description = "toujour solide"
+icone = ExtResource("1_t0k0u")
+metadata/_custom_type_script = "uid://h664u668ogi7"

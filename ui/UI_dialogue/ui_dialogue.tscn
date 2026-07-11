@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://f15sqqile0r2"]
+
+[ext_resource type="Script" uid="uid://n1m4ui7n3sfa" path="res://ui/UI_dialogue/ui_dialogue.gd" id="1_qvycr"]
+
+[node name="ui_dialogue" type="CanvasLayer" unique_id=1775559206]
+script = ExtResource("1_qvycr")
+
+[node name="panel" type="Panel" parent="." unique_id=1782977772]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 295.0
+offset_top = -194.0
+offset_right = -178.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+
+[node name="Nom_pnj" type="Label" parent="panel" unique_id=2059374293]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2827688
+anchor_top = 0.10465116
+anchor_right = 0.7025037
+anchor_bottom = 0.10465116
+offset_right = 1.0
+offset_bottom = 23.0
+horizontal_alignment = 2
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="dialogue pnj" type="Label" parent="panel" unique_id=1056897758]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 114.0
+offset_right = 450.0
+offset_bottom = 171.0

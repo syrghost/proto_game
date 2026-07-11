@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://drtrl50m6rvww"]
+
+[ext_resource type="PackedScene" uid="uid://ddpk6ji43j1am" path="res://Scene/Player/player.tscn" id="1_cy8bi"]
+[ext_resource type="PackedScene" uid="uid://dkuq3vft1wss" path="res://Scene/pnj/pnj_1.tscn" id="2_g71ij"]
+[ext_resource type="PackedScene" uid="uid://f15sqqile0r2" path="res://ui/UI_dialogue/ui_dialogue.tscn" id="3_wfftj"]
+[ext_resource type="PackedScene" uid="uid://etbflabl0b8g" path="res://Arme/Scene_arme/poser_au_sol/epee_en_bois.tscn" id="4_rkj5o"]
+[ext_resource type="PackedScene" uid="uid://1yeqb8wa5vi4" path="res://ui/UI_inventaire/iventaire_ui.tscn" id="5_0llcd"]
+[ext_resource type="PackedScene" uid="uid://bbm51k6gcfm6c" path="res://Arme/Scene_arme/poser_au_sol/epee_2_test.tscn" id="6_28e1a"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cy8bi"]
+sky_top_color = Color(0.7043725, 0.4617092, 0.70049465, 1)
+sky_horizon_color = Color(1.0188901, 0.9223227, 0.94876146, 1)
+ground_bottom_color = Color(0.46429545, 0.3206893, 0.18765888, 1)
+ground_horizon_color = Color(1.0188901, 0.9223227, 0.94876146, 1)
+
+[sub_resource type="Sky" id="Sky_g71ij"]
+sky_material = SubResource("ProceduralSkyMaterial_cy8bi")
+
+[sub_resource type="Environment" id="Environment_wfftj"]
+background_mode = 2
+sky = SubResource("Sky_g71ij")
+
+[node name="Node" type="Node" unique_id=2111768213]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1980702978]
+environment = SubResource("Environment_wfftj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=197307232]
+transform = Transform3D(-0.90333533, -0.31624407, 0.2897843, 0, 0.6755902, 0.7372773, -0.42893502, 0.66600865, -0.6102845, 0, 0, 0)
+light_energy = 1.25
+shadow_enabled = true
+directional_shadow_max_distance = 160.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=951135654]
+use_collision = true
+size = Vector3(50, 0.2, 50)
+
+[node name="CharacterBody3D" parent="." unique_id=1332575633 instance=ExtResource("1_cy8bi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20134711, 0)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1520975249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1121354, 1.4458516, 0)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1286815729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84947443, -9.262245)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=961288200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.216633, 1.4140674, 0)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=2045192412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9693446, 2.2005746)
+use_collision = true
+
+[node name="ui_dialogue" parent="." unique_id=1775559206 instance=ExtResource("3_wfftj")]
+
+[node name="pnj_1" parent="." unique_id=2081731155 instance=ExtResource("2_g71ij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6407385, 0.12579036, 0)
+
+[node name="IventaireUi" parent="." unique_id=803686246 instance=ExtResource("5_0llcd")]
+
+[node name="EpeeEnBois" parent="." unique_id=485241837 instance=ExtResource("4_rkj5o")]
+transform = Transform3D(2.9802322e-08, -1, 0, 1, 2.9802322e-08, 0, 0, 0, 1, -4, 0.2, 0)
+
+[node name="epee_2_test" parent="." unique_id=1954010494 instance=ExtResource("6_28e1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -7)

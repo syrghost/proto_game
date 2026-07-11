@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bqfg2wg67kp7s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0llcd"]
+albedo_color = Color(0.9328352, 0.8518569, 0.3486053, 1)
+metallic = 0.7
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_j6sbu"]
+material = SubResource("StandardMaterial3D_0llcd")
+height = 85.0
+
+[node name="Epee_en_bois_model" type="Node3D" unique_id=907283186]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1732370358]
+mesh = SubResource("CylinderMesh_j6sbu")

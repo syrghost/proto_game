@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://b872fuijbluk3"]
+
+[ext_resource type="Script" uid="uid://c34g3o8vpadcv" path="res://ui/UI_inventaire/menu_objet.gd" id="1_oa1lr"]
+
+[node name="menu_objet" type="PopupPanel" unique_id=723204413]
+oversampling_override = 1.0
+mode = 3
+size = Vector2i(105, 109)
+visible = true
+script = ExtResource("1_oa1lr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=478710836]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Equiper" type="Button" parent="VBoxContainer" unique_id=1647351435]
+layout_mode = 2
+text = "Equiper"
+
+[node name="Désequiper" type="Button" parent="VBoxContainer" unique_id=152902896]
+layout_mode = 2
+text = "Désequiper"
+
+[node name="jetter" type="Button" parent="VBoxContainer" unique_id=187428716]
+layout_mode = 2
+text = "Jeter"
+
+[connection signal="pressed" from="VBoxContainer/Equiper" to="." method="_on_bouton_equiper_pressed"]
+[connection signal="pressed" from="VBoxContainer/Désequiper" to="." method="_on_bouton_desequiper_pressed"]
+[connection signal="pressed" from="VBoxContainer/jetter" to="." method="_on_bouton_jeter_pressed"]
