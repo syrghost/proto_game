@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bccgrnp87y2lt"]
+
+[ext_resource type="Script" uid="uid://dmfa23bdyejix" path="res://ui/UI_FOCUS_ENNEMI/focus_ennemi.gd" id="1_4iu8h"]
+
+[node name="focus_ennemi" type="CanvasLayer" unique_id=1840343649]
+
+[node name="Control" type="Control" parent="." unique_id=259357079]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_4iu8h")
+
+[node name="point" type="Label" parent="Control" unique_id=397185554]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "je suis bien afficher"

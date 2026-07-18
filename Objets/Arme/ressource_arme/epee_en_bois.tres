@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Arme" format=3 uid="uid://ca16lg2qxysxg"]
+
+[ext_resource type="Script" uid="uid://h664u668ogi7" path="res://Objets/Arme/Arme.gd" id="1_sdeyh"]
+[ext_resource type="Texture2D" uid="uid://dbeeqy6im6v1t" path="res://icon.svg" id="1_wtmj6"]
+[ext_resource type="PackedScene" uid="uid://bqfg2wg67kp7s" path="res://Objets/Arme/Scene_arme/model_3D_arme/epee_en_bois_model.tscn" id="2_wtmj6"]
+
+[resource]
+script = ExtResource("1_sdeyh")
+scene_modele = ExtResource("2_wtmj6")
+chemin_scene_monde = "res://Arme/Scene_arme/poser_au_sol/epee_en_bois.tscn"
+id = "5"
+nom = "epee en bois"
+description = "une epee fragile"
+icone = ExtResource("1_wtmj6")
+metadata/_custom_type_script = "uid://h664u668ogi7"

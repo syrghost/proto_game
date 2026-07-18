@@ -1,0 +1,35 @@
+[gd_resource type="AnimationNodeBlendSpace2D" format=3 uid="uid://vpbi5nidfp0"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hklmv"]
+animation = &"idle_combat"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wagb4"]
+animation = &"focus_devant"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fst78"]
+animation = &"focus_derriere"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rkjca"]
+animation = &"focus_gauche"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y7m07"]
+animation = &"focus_droite"
+
+[resource]
+x_label = "y"
+y_label = "x"
+blend_point_0/node = SubResource("AnimationNodeAnimation_hklmv")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_0/name = &"idle_combat"
+blend_point_1/node = SubResource("AnimationNodeAnimation_wagb4")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_1/name = &"focus_devant"
+blend_point_2/node = SubResource("AnimationNodeAnimation_fst78")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_2/name = &"focus_derriere"
+blend_point_3/node = SubResource("AnimationNodeAnimation_rkjca")
+blend_point_3/pos = Vector2(-1, 0)
+blend_point_3/name = &"focus_gauche"
+blend_point_4/node = SubResource("AnimationNodeAnimation_y7m07")
+blend_point_4/pos = Vector2(1, 0)
+blend_point_4/name = &"focus_droite"

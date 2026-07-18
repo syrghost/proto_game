@@ -15,6 +15,9 @@ func ajouter_objet(objet: Objet, quantite: int = 1) -> void:
 	else:
 		contenu[objet.id] = {"objet": objet, "quantite": quantite}
 	objet_ajoute.emit(objet, quantite)
+	# equipement automatique si aucune arme est equipee
+	#if objet is Arme and arme_equipee_actuelle == null :
+		#equiper_arme(objet)
 
 func retirer_objet(objet: Objet, quantite: int = 1) -> void:
 	if objet.id in contenu:
@@ -41,3 +44,10 @@ func jeter_objet(objet: Objet, quantite: int) -> void:
 		desequiper_arme()
 	retirer_objet(objet, quantite)
 	objet_jete.emit(objet)
+
+func obtenir_premiere_arme() -> Arme:
+	for id in contenu:
+		var entree = contenu[id]
+		if entree.objet is Arme:
+			return entree.objet
+	return null

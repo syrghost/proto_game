@@ -36,3 +36,5 @@ func terminer_dialogue() -> void:
 	pnj_actuel = null
 	index_ligne = 0
 	dialogue_termine.emit()
+	
+	

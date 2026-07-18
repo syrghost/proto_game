@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dyj2mu4o2ca1t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyamn"]
+albedo_color = Color(0.67598844, 0.09634837, 0.13556203, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_j6sbu"]
+material = SubResource("StandardMaterial3D_iyamn")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j6sbu"]
+
+[node name="ennemis_test" type="StaticBody3D" unique_id=1176722750 groups=["ennemis"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1802306454]
+mesh = SubResource("CapsuleMesh_j6sbu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=181175412]
+shape = SubResource("CapsuleShape3D_j6sbu")
