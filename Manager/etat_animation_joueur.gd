@@ -6,6 +6,7 @@ signal arme_sorti
 var ennemis_a_portee : Array[Node3D] = []
 var cible_verrouillee : Node3D = null
 var verrouillage_actif : bool = false
+var hitbox_arme: Area3D
 
 #---------------------------------------------------------------------------------
 #------------------------------- POUR COMBO ----------------------------
@@ -25,6 +26,7 @@ var animation_tree : AnimationTree
 var player : CharacterBody3D
 var sprint_autoriser : bool = true
 var camera : Camera3D
+var sante_player : Node
 
 
 
@@ -167,7 +169,9 @@ func esquiver() -> void:
 
 	player.lancer_esquive(direction_esquive, arme.distance_esquive, duree_reelle)
 
+	player.sante.invincible = true
 	await get_tree().create_timer(duree_reelle).timeout
+	player.sante.invincible = false
 
 	player.velocity.x = 0
 	player.velocity.z = 0
@@ -225,6 +229,8 @@ func trouver_ennemi_plus_proche() -> Node3D:
 	var plus_proche : Node3D = null
 	var distance_min : float = INF
 	for ennemi in ennemis_a_portee:
+		if not is_instance_valid(ennemi):
+			continue
 		var d = player.global_position.distance_to(ennemi.global_position)
 		if d < distance_min:
 			distance_min = d
@@ -277,11 +283,17 @@ func changement_d_etat(nouvelle_etat):
 			player.peut_bouger = false
 			input_attaque_en_attente = false
 			animation_tree.active = false
-
 			if arme.animation_combo_arme.is_empty():
 				# Pas de combo défini : attaque simple unique
 				animation.play(arme.animation_attaqe_arme, -1, arme.vitesse_attaque)
 				player.lancer_dash_attaque(1.5, 0.25)
+				
+				# activation / desactivation de la hitbox de l'arme
+				if hitbox_arme :
+					await get_tree().create_timer(0.15).timeout
+					hitbox_arme.activer(arme.dommage_arme)
+					await get_tree().create_timer(0.2).timeout
+					hitbox_arme.desactiver()
 				await animation.animation_finished
 				player.peut_bouger = true
 				player.attaque = false
@@ -292,6 +304,11 @@ func changement_d_etat(nouvelle_etat):
 				var nom_anim = arme.animation_combo_arme[index_combo]
 				animation.play(nom_anim, -1, arme.vitesse_attaque)
 				player.lancer_dash_attaque(1.5, 0.25)
+				if hitbox_arme :
+					await get_tree().create_timer(0.15).timeout
+					hitbox_arme.activer(arme.dommage_arme)
+					await get_tree().create_timer(0.2).timeout
+					hitbox_arme.desactiver()
 				await animation.animation_finished
 
 				if input_attaque_en_attente and index_combo < arme.animation_combo_arme.size() - 1:

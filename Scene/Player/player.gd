@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var camera: Node3D = $logique_cam
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var camera_3d: Camera3D = $logique_cam/Camera3D
+@onready var sante: Sante = $Sante
 
 var vitesse : float = 3.0
 var force_de_saut : float = 4.5
@@ -25,6 +26,7 @@ func _ready() -> void:
 	EtatAnimationJoueur.animation = animation
 	EtatAnimationJoueur.animation_tree = animation_tree
 	EtatAnimationJoueur.camera = camera_3d
+	EtatAnimationJoueur.sante_player = sante
 	print(animation_tree.get_tree_root())
 
 func lancer_dash_attaque(distance: float, duree: float) -> void:

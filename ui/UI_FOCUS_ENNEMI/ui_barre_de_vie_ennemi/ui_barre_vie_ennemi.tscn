@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://r8r8y0hoh2w7"]
+
+[ext_resource type="Script" uid="uid://dyp2h848q5i62" path="res://ui/UI_FOCUS_ENNEMI/ui_barre_de_vie_ennemi/ui_barre_vie_ennemi.gd" id="1_ej7i5"]
+
+[node name="ui_barre_vie_ennemi" type="Control" unique_id=1950919581]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ej7i5")
+
+[node name="vie_ennemi" type="ProgressBar" parent="." unique_id=1815630936]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

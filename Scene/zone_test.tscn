@@ -9,6 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://dyj2mu4o2ca1t" path="res://ennemis/ennemis_test.tscn" id="7_6muks"]
 [ext_resource type="PackedScene" uid="uid://bccgrnp87y2lt" path="res://ui/UI_FOCUS_ENNEMI/focus_ennemi.tscn" id="8_n5tuq"]
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_iyamn"]
+vertices = PackedVector3Array(-24.5, 0.39999962, -24.499996, -24.5, 0.39999962, 24.500004, 24.5, 0.39999962, 24.500004, 24.5, 0.39999962, -24.499996)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cy8bi"]
 sky_top_color = Color(0.7043725, 0.4617092, 0.70049465, 1)
 sky_horizon_color = Color(1.0188901, 0.9223227, 0.94876146, 1)
@@ -24,6 +28,15 @@ sky = SubResource("Sky_g71ij")
 
 [node name="Node" type="Node" unique_id=2111768213]
 
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=166698580]
+transform = Transform3D(1, 1.4901161e-08, 1.4901161e-08, -1.4901161e-08, 1, 0, 1.4901161e-08, -2.9802322e-08, 1.0000001, 0, 0, 0)
+navigation_mesh = SubResource("NavigationMesh_iyamn")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D" unique_id=951135654]
+transform = Transform3D(1, -1.4901161e-08, -1.4901159e-08, 1.4901161e-08, 1, -2.2204458e-16, -1.4901159e-08, 2.9802319e-08, 0.9999999, 0, 0, 0)
+use_collision = true
+size = Vector3(50, 0.2, 50)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1980702978]
 environment = SubResource("Environment_wfftj")
 
@@ -32,10 +45,6 @@ transform = Transform3D(-0.90333533, -0.31624407, 0.2897843, 0, 0.6755902, 0.737
 light_energy = 1.25
 shadow_enabled = true
 directional_shadow_max_distance = 160.0
-
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=951135654]
-use_collision = true
-size = Vector3(50, 0.2, 50)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1520975249]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1121354, 1.4458516, 0)
@@ -64,7 +73,7 @@ transform = Transform3D(2.9802322e-08, -1, 0, 1, 2.9802322e-08, 0, 0, 0, 1, -4, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -7)
 
 [node name="ennemis_test" parent="." unique_id=349027594 instance=ExtResource("7_6muks")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4175103, 3.04198)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.054023743, 8.606121)
 
 [node name="CharacterBody3D" parent="." unique_id=1332575633 instance=ExtResource("1_cy8bi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37810445, -15.06886)
@@ -72,4 +81,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37810445, -15.06886)
 [node name="focus_ennemi" parent="." unique_id=1840343649 instance=ExtResource("8_n5tuq")]
 
 [node name="ennemis_test2" parent="." unique_id=1176722750 instance=ExtResource("7_6muks")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5861635, 1.8033433, 3.9462357)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.125415, -0.0056056976, 3.9462357)

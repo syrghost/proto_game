@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c0ewdpmnhqeri"]
+
+[ext_resource type="Script" uid="uid://cfeb3f6bm8fu7" path="res://ui/ui_vie_player/vie_player.gd" id="1_m7y7y"]
+
+[node name="ui_vie_joueur" type="CanvasLayer" unique_id=447342142]
+
+[node name="vie_player" type="Control" parent="." unique_id=413191655]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_m7y7y")
+
+[node name="barre_vie" type="ProgressBar" parent="vie_player" unique_id=281413218]
+layout_mode = 1
+offset_right = 310.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0.82191056, 2.623126e-06, 7.70092e-07, 1)
+theme_override_colors/font_outline_color = Color(0.8882976, 0.15232313, 0.4882043, 1)

@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 DialogueManager="*uid://y5m06lo1ik57"
 IventaireManager="*uid://dfc8isrt7tk7u"
 EtatAnimationJoueur="*uid://batqbnd3hd32o"
+UiManager="*uid://b4rbl76a32mi2"
 
 [display]
 
@@ -31,6 +32,7 @@ window/stretch/aspect="expand"
 
 folder_colors={
 "res://Manager/": "green",
+"res://Objets/": "red",
 "res://Objets/Arme/": "red",
 "res://Scene/": "purple",
 "res://Scripts/Donnee/": "orange",
@@ -42,6 +44,7 @@ folder_colors={
 pnj=""
 ramassable=""
 ennemis=""
+joueur=""
 
 [input]
 

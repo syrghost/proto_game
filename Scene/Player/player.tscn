@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://bcdlkv3o4jr2c" path="res://Scene/Player/gestionaire_combat.gd" id="9_usf6g"]
 [ext_resource type="Script" uid="uid://dan8y86g0vyf0" path="res://Scene/Player/detection_enemis.gd" id="10_b00hk"]
 [ext_resource type="AnimationNodeBlendSpace2D" uid="uid://vpbi5nidfp0" path="res://Objets/Arme/blend/blend_animation_focus_epee.tres" id="12_wagb4"]
+[ext_resource type="PackedScene" uid="uid://c0ewdpmnhqeri" path="res://ui/ui_vie_player/ui_vie_joueur.tscn" id="13_fst78"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8e47j"]
 resource_name = "Beta_Joints_MAT1"
@@ -11932,7 +11933,7 @@ radius = 0.83478343
 [sub_resource type="SphereShape3D" id="SphereShape3D_y7ebk"]
 radius = 10.0
 
-[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1332575633]
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1332575633 groups=["joueur"]]
 script = ExtResource("1_yic5t")
 
 [node name="mesh" type="Node3D" parent="." unique_id=803276266]
@@ -12487,6 +12488,8 @@ root_node = NodePath("../mesh/player_animation")
 tree_root = ExtResource("12_wagb4")
 anim_player = NodePath("../mesh/player_animation/AnimationPlayer")
 parameters/blend_position = Vector2(-0.002538085, -0.9908676)
+
+[node name="ui_vie_joueur" parent="." unique_id=447342142 instance=ExtResource("13_fst78")]
 
 [connection signal="body_entered" from="Aire_dialogue" to="Aire_dialogue" method="_on_body_entered"]
 [connection signal="body_exited" from="Aire_dialogue" to="Aire_dialogue" method="_on_body_exited"]

@@ -1,13 +1,14 @@
 [gd_resource type="Resource" script_class="Arme" format=3 uid="uid://bummd88jo1dg8"]
 
-[ext_resource type="PackedScene" uid="uid://bvle46murftho" path="res://Objets/Arme/Scene_arme/model_3D_arme/epee_2.tscn" id="1_hnn3c"]
 [ext_resource type="Script" uid="uid://h664u668ogi7" path="res://Objets/Arme/Arme.gd" id="1_nn7r2"]
 [ext_resource type="Texture2D" uid="uid://d0rcalqb51w7x" path="res://Assets/Arme_test/autumn_sword_0.png" id="1_t0k0u"]
+[ext_resource type="PackedScene" uid="uid://bvle46murftho" path="res://Objets/Arme/Scene_arme/model_3D_arme/epee_2.tscn" id="2_pj85k"]
 
 [resource]
 script = ExtResource("1_nn7r2")
-scene_modele = ExtResource("1_hnn3c")
-chemin_scene_monde = "res://Arme/Scene_arme/poser_au_sol/epee_2_test.tscn"
+scene_modele = ExtResource("2_pj85k")
+chemin_scene_monde = "res://Objets/Arme/Scene_arme/poser_au_sol/epee_2_test.tscn"
+dommage_arme = 15
 animation_ranger_arme = "ranger_epee"
 animation_sortir_arme = "retirer_epee"
 animation_idle_arme = "idle_combat"

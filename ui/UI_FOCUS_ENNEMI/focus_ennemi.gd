@@ -3,6 +3,7 @@ extends Control
 var camera : Camera3D
 
 func _ready() -> void:
+	UiManager.canvas_ui = self
 	point.visible = false
 	camera = get_viewport().get_camera_3d()
 
