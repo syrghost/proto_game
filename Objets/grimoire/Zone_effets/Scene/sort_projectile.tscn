@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b25ecnr6kao7x"]
+
+[ext_resource type="Script" uid="uid://derqi5vgtxeek" path="res://Objets/grimoire/Zone_effets/Scripts/sort_projectile.gd" id="1_tnk4a"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j6sbu"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_j6sbu"]
+
+[node name="Sort_projectile" type="Area3D" unique_id=1784295297]
+script = ExtResource("1_tnk4a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=18345806]
+shape = SubResource("SphereShape3D_j6sbu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1308378930]
+mesh = SubResource("SphereMesh_j6sbu")

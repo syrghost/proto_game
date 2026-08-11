@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Grimoire" format=3 uid="uid://cnr28c0ti220m"]
+
+[ext_resource type="Texture2D" uid="uid://dbeeqy6im6v1t" path="res://icon.svg" id="1_gkngn"]
+[ext_resource type="Script" uid="uid://do0ijbeotv0a3" path="res://Objets/grimoire/grimoire.gd" id="1_s35kr"]
+[ext_resource type="PackedScene" uid="uid://bn5u0bofsh5s1" path="res://Objets/grimoire/Zone_effets/Scene/sort_zone.tscn" id="2_yluqf"]
+
+[resource]
+script = ExtResource("1_s35kr")
+element = 1
+type_sort = 1
+nom_sort = "foudre"
+cout_mana = 2
+degats_sort = 70
+rayon_zone = 30.0
+animation_incantation = "Lancer_sort"
+scene_indicateur = ExtResource("2_yluqf")
+id = "foudre"
+nom = "foudre"
+icone = ExtResource("1_gkngn")
+type_objet = 3
+empilable = false
+quantite_max = 1
+metadata/_custom_type_script = "uid://do0ijbeotv0a3"

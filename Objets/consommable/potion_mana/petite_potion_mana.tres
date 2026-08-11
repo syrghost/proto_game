@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Consommable" format=3 uid="uid://c0ysv8cukchp3"]
+
+[ext_resource type="Texture2D" uid="uid://blr0oqxms4x8h" path="res://Assets/mana.png" id="1_kobxe"]
+[ext_resource type="Script" uid="uid://ccio575unkktp" path="res://Objets/consommable/ressource/Consommable.gd" id="1_ky8nl"]
+
+[resource]
+script = ExtResource("1_ky8nl")
+type_effet = 1
+valeur = 15.0
+id = "petit mana"
+nom = "petit mana"
+description = "tres utile"
+icone = ExtResource("1_kobxe")
+type_objet = 4
+metadata/_custom_type_script = "uid://ccio575unkktp"

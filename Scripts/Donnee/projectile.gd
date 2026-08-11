@@ -1,4 +1,3 @@
-# projectile.gd
 extends Node3D
 
 var effet_associe : EffetCombat

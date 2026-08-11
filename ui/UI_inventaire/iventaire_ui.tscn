@@ -7,22 +7,55 @@
 script = ExtResource("1_vcl0u")
 
 [node name="Panel" type="Panel" parent="." unique_id=1254054910]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+size_flags_horizontal = 4
 
 [node name="TabContainer" type="TabContainer" parent="Panel" unique_id=1429655351]
-layout_mode = 0
-offset_right = 8.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -156.0
 offset_bottom = 40.0
-current_tab = 2
+grow_horizontal = 0
+current_tab = 0
 
 [node name="Equipement" type="Control" parent="Panel/TabContainer" unique_id=717337046]
-visible = false
 layout_mode = 2
 script = ExtResource("1_4eqs6")
+type_filtre = Array[int]([0])
 metadata/_tab_index = 0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/TabContainer/Equipement" unique_id=1287993775]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 5
+
+[node name="Bottes" type="Control" parent="Panel/TabContainer" unique_id=633693084]
+visible = false
+layout_mode = 2
+script = ExtResource("1_4eqs6")
+type_filtre = Array[int]([2])
+metadata/_tab_index = 1
+
+[node name="GridContainer" type="GridContainer" parent="Panel/TabContainer/Bottes" unique_id=1328305215]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 5
+
+[node name="Armure" type="Control" parent="Panel/TabContainer" unique_id=1487237678]
+visible = false
+layout_mode = 2
+script = ExtResource("1_4eqs6")
+type_filtre = Array[int]([1])
+metadata/_tab_index = 2
+
+[node name="GridContainer" type="GridContainer" parent="Panel/TabContainer/Armure" unique_id=1269340903]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -32,8 +65,8 @@ columns = 5
 visible = false
 layout_mode = 2
 script = ExtResource("1_4eqs6")
-type_filtre = 1
-metadata/_tab_index = 1
+type_filtre = Array[int]([4])
+metadata/_tab_index = 3
 
 [node name="GridContainer" type="GridContainer" parent="Panel/TabContainer/Consomable" unique_id=1813467180]
 layout_mode = 0
@@ -41,13 +74,27 @@ offset_right = 40.0
 offset_bottom = 40.0
 columns = 5
 
-[node name="Objet_clef" type="Control" parent="Panel/TabContainer" unique_id=1901540196]
+[node name="Bouclier" type="Control" parent="Panel/TabContainer" unique_id=1901540196]
+visible = false
 layout_mode = 2
 script = ExtResource("1_4eqs6")
-type_filtre = 3
-metadata/_tab_index = 2
+type_filtre = Array[int]([7])
+metadata/_tab_index = 4
 
-[node name="GridContainer" type="GridContainer" parent="Panel/TabContainer/Objet_clef" unique_id=1425305886]
+[node name="GridContainer" type="GridContainer" parent="Panel/TabContainer/Bouclier" unique_id=1425305886]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 5
+
+[node name="Grimoire" type="Control" parent="Panel/TabContainer" unique_id=1609037262]
+visible = false
+layout_mode = 2
+script = ExtResource("1_4eqs6")
+type_filtre = Array[int]([3])
+metadata/_tab_index = 5
+
+[node name="GridContainer" type="GridContainer" parent="Panel/TabContainer/Grimoire" unique_id=1608064349]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

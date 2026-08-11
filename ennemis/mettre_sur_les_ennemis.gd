@@ -12,13 +12,13 @@ class_name Ennemi
 # ---------------------------SCENE VIE AU DESSUS ENNEMI -------------------------
 const barre_de_vie_ennemi = preload("res://ui/UI_FOCUS_ENNEMI/ui_barre_de_vie_ennemi/ui_barre_vie_ennemi.tscn")
 #--------------------------------------------------------------------------------------
-enum Etat { patrouille, poursuite, attaque, mort }
+enum Etat { patrouille, poursuite, attaque,etourdi, mort }
 var etat_actuel : Etat = Etat.patrouille
 
 var joueur_detecte : Node3D = null
 var peut_attaquer : bool = true
 var en_transition : bool = false
-
+var barre : Control
 func _ready() -> void:
 	sante.vie_max = type_ennemi.vie_max
 	sante.mort.connect(_on_mort)
@@ -27,10 +27,10 @@ func _ready() -> void:
 	zone_detection_joueur.joueur_perdu.connect(_on_joueur_perdu)
 	hit_box_arme_ou_main.monitoring = false
 	#------------------instanciation de la barre de vie-------------------
-	while UiManager.canvas_ui == null:
+	while UiManager.focus_ennemi_cible == null:
 			await get_tree().process_frame
-	var barre = barre_de_vie_ennemi.instantiate()
-	UiManager.canvas_ui.add_child(barre)
+	barre = barre_de_vie_ennemi.instantiate()
+	UiManager.focus_ennemi_cible.add_child(barre)
 	barre.configurer(self,sante)
 	#---------------------------------------------------------------------------
 
@@ -43,10 +43,33 @@ func _physics_process(delta: float) -> void:
 		Etat.poursuite:
 			mode_poursuite(delta)
 		Etat.attaque:
-			pass  # géré par la coroutine attaquer()
+			pass
+		Etat.etourdi:
+			pass
 		Etat.mort:
 			pass
 	move_and_slide()
+
+func etourdir(duree: float, direction_recul: Vector3) -> void:
+	if etat_actuel == Etat.mort:
+		return
+	etat_actuel = Etat.etourdi
+	peut_attaquer = false
+
+	if type_ennemi.animation_etourdi != "":
+		animation.play(type_ennemi.animation_etourdi)
+
+	velocity = direction_recul * 3.0
+	velocity.y = 0
+
+	await get_tree().create_timer(duree).timeout
+
+	if etat_actuel == Etat.etourdi:
+		if is_instance_valid(joueur_detecte):
+			etat_actuel = Etat.poursuite
+		else:
+			etat_actuel = Etat.patrouille
+		peut_attaquer = true
 
 func mode_patrouille(delta: float) -> void:
 	if animation.current_animation != type_ennemi.animation_idle:
@@ -96,34 +119,39 @@ func attaquer() -> void:
 	if type_ennemi.arme_equipee:
 		nom_anim = type_ennemi.arme_equipee.animation_attaqe_arme
 		degats = type_ennemi.arme_equipee.dommage_arme
-		hitbox_a_utiliser = type_ennemi.arme_equipee.find_child("detection_ennemi")  # référence vers la hitbox de l'arme équipée, si applicable
+		hitbox_a_utiliser = type_ennemi.arme_equipee.find_child("detection_ennemi")  # référence vers la hitbox de l'arme équipée
 	else:
 		nom_anim = type_ennemi.animation_attaque
 		degats = type_ennemi.degat_attaque_main
-		hitbox_a_utiliser = hit_box_arme_ou_main  # adapte le chemin exact vers ta hitbox à mains nues
+		hitbox_a_utiliser = hit_box_arme_ou_main 
 
 	animation.play(nom_anim)
 
-	await get_tree().create_timer(0.2).timeout  # délai avant l'impact, à ajuster
+	await get_tree().create_timer(0.2).timeout  # délai avant l'impact
 	await hitbox_a_utiliser.activer(degats, "joueur")
 	await get_tree().create_timer(0.15).timeout
 	hitbox_a_utiliser.desactiver()
 
 	await animation.animation_finished
 	en_transition = false
-	etat_actuel = Etat.poursuite
+	if etat_actuel != Etat.etourdi and  etat_actuel != Etat.mort :
+		etat_actuel = Etat.poursuite
 
 	await get_tree().create_timer(type_ennemi.cooldown_attaque).timeout
 	peut_attaquer = true
 
 func _on_joueur_detecte(joueur: Node3D) -> void:
 	joueur_detecte = joueur
+	if barre != null :
+		barre.visible = true
 	if etat_actuel == Etat.patrouille:
 		etat_actuel = Etat.poursuite
 
 func _on_joueur_perdu(joueur: Node3D) -> void:
 	if joueur == joueur_detecte:
 		joueur_detecte = null
+		if barre !=  null :
+			barre.visible = false
 		if etat_actuel != Etat.attaque:
 			etat_actuel = Etat.patrouille
 

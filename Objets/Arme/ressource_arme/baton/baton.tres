@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Baton" format=3 uid="uid://qja4gk8a084f"]
+
+[ext_resource type="Texture2D" uid="uid://dbeeqy6im6v1t" path="res://icon.svg" id="1_0q517"]
+[ext_resource type="Script" uid="uid://bga7fh7iebmdl" path="res://Objets/Arme/baton/baton.gd" id="1_u04ph"]
+[ext_resource type="PackedScene" uid="uid://b25bjbf20yj6f" path="res://Objets/Arme/Scene_arme/model_3D_arme/baton/baton_test.tscn" id="2_h500w"]
+
+[resource]
+script = ExtResource("1_u04ph")
+scene_modele = ExtResource("2_h500w")
+animation_ranger_arme = "ranger_epee"
+animation_sortir_arme = "retirer_epee"
+esquive_avant = "esquive"
+esquive_arriere = "esquive"
+esquive_gauche = "esquive"
+esquive_droite = "esquive"
+id = "baton"
+nom = "baton"
+icone = ExtResource("1_0q517")
+empilable = false
+quantite_max = 1
+metadata/_custom_type_script = "uid://bga7fh7iebmdl"

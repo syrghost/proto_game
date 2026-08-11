@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Arme" format=3 uid="uid://bmfqyxgiq30e8"]
+
+[ext_resource type="Texture2D" uid="uid://dbeeqy6im6v1t" path="res://icon.svg" id="1_u2cnb"]
+[ext_resource type="Script" uid="uid://h664u668ogi7" path="res://Objets/Arme/Arme.gd" id="1_udvtc"]
+[ext_resource type="PackedScene" uid="uid://bvle46murftho" path="res://Objets/Arme/Scene_arme/model_3D_arme/epee_2.tscn" id="2_r08u2"]
+
+[resource]
+script = ExtResource("1_udvtc")
+scene_modele = ExtResource("2_r08u2")
+dommage_arme = 20
+animation_ranger_arme = "ranger_epee"
+animation_sortir_arme = "retirer_epee"
+animation_idle_arme = "idle_combat"
+animation_combo_arme = Array[String](["Attaq_epee", "attaque1"])
+animation_marche_combat_arme = "courir_epee_equiper"
+esquive_avant = "esquive"
+esquive_arriere = "esquive"
+esquive_gauche = "esquive"
+esquive_droite = "esquive"
+focus_devant = "focus_devant"
+focus_derriere = "focus_derriere"
+focus_gauche = "focus_gauche"
+focus_droite = "focus_droite"
+vitesse_player_avec_arme = 1.5
+vitesse_attaque = 1.5
+id = "epee"
+nom = "plas"
+icone = ExtResource("1_u2cnb")
+empilable = false
+metadata/_custom_type_script = "uid://h664u668ogi7"

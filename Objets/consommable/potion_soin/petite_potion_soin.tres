@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Consommable" format=3 uid="uid://dv5iic3f82qra"]
+
+[ext_resource type="Texture2D" uid="uid://dbeeqy6im6v1t" path="res://icon.svg" id="1_u3bii"]
+[ext_resource type="Script" uid="uid://ccio575unkktp" path="res://Objets/consommable/ressource/Consommable.gd" id="2_15gn3"]
+
+[resource]
+script = ExtResource("2_15gn3")
+valeur = 30.0
+id = "petite potion"
+nom = "petite potion de soin"
+description = "te fait gagner des pv"
+icone = ExtResource("1_u3bii")
+type_objet = 4
+metadata/_custom_type_script = "uid://ccio575unkktp"

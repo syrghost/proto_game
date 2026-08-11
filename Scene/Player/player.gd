@@ -5,11 +5,18 @@ extends CharacterBody3D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var camera_3d: Camera3D = $logique_cam/Camera3D
 @onready var sante: Sante = $Sante
+@onready var mana: Mana = $Mana
+@onready var point_spawm_sort: Marker3D = $mesh/player_animation/Armature/Skeleton3D/PointAttachementArme/Point_spawm_sort
 
 var vitesse : float = 3.0
 var force_de_saut : float = 4.5
 var vitesse_marche : float = 3.0
 var vitesse_course : float = 6.5
+
+var vitesse_marche_base : float = 3.0
+var vitesse_course_base : float = 6.5
+
+
 var courir = false
 var peut_bouger = true
 var direction : Vector3
@@ -20,14 +27,53 @@ var dash_en_cours : bool = false
 var dash_direction : Vector3
 var dash_vitesse : float = 0.0
 
-
 func _ready() -> void:
 	EtatAnimationJoueur.player = self
 	EtatAnimationJoueur.animation = animation
 	EtatAnimationJoueur.animation_tree = animation_tree
 	EtatAnimationJoueur.camera = camera_3d
 	EtatAnimationJoueur.sante_player = sante
+	EtatAnimationJoueur.mana_player = mana
+	IventaireManager.connecter_sante()
+	IventaireManager.armure_equipee.connect(_recalculer_vitesse)
+	IventaireManager.armure_desequipee.connect(_recalculer_vitesse)
+	IventaireManager.bottes_equipees.connect(_recalculer_vitesse)
+	IventaireManager.bottes_desequipees.connect(_recalculer_vitesse)
+	_recalculer_vitesse()
 	print(animation_tree.get_tree_root())
+	
+	#------------------------------- Teste -----------------------------
+	var resu = load("res://Objets/consommable/Resu/petite_resu.tres")
+	IventaireManager.ajouter_objet(resu , 2)
+	await get_tree().create_timer(1.0).timeout
+	sante.subir_degats(9999)  # force les PV à 0 pour déclencher pv_a_zero
+	var potion = load("res://Objets/consommable/potion_soin/petite_potion_soin.tres")
+	IventaireManager.ajouter_objet(potion,3)
+	if potion != null:
+		print("potion bien ajouter")
+	print("type_objet de la potion : ", potion.type_objet)
+	var potion_soin = load("res://Objets/consommable/potion_soin/potion_soin.tres")
+	IventaireManager.ajouter_objet(potion_soin,10)
+	var potion_mana = load("res://Objets/consommable/potion_mana/petite_potion_mana.tres")
+	IventaireManager.ajouter_objet(potion_mana,4)
+	var armure_test = load("res://Objets/Armure/ressource/test.tres")
+	var bottes_test = load("res://Objets/Bottes/ressourse/bottes_test.tres")
+	IventaireManager.ajouter_objet(armure_test)
+	IventaireManager.ajouter_objet(bottes_test)
+	var epee = load("res://Objets/Arme/ressource_arme/Epee/epee.tres")
+	IventaireManager.ajouter_objet(epee)
+	var baton = load("res://Objets/Arme/ressource_arme/baton/baton.tres")
+	IventaireManager.ajouter_objet(baton)
+	var grimoire = load("res://Objets/grimoire/ressource/sort_feu.tres")
+	IventaireManager.ajouter_objet(grimoire)
+	SortManager.apprendre_sort(grimoire)
+	var foudre = load("res://Objets/grimoire/ressource/foudre.tres")
+	SortManager.apprendre_sort(foudre)
+	IventaireManager.ajouter_objet(foudre)
+	var bouclier_test = load("res://Objets/Bouclier/ressource/bouclier_test.tres")
+	IventaireManager.ajouter_objet(bouclier_test)
+	#--	------------------------------------------------------------------------
+
 
 func lancer_dash_attaque(distance: float, duree: float) -> void:
 	dash_direction = -mesh.global_transform.basis.z
@@ -86,3 +132,8 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, vitesse)
 
 	move_and_slide()
+
+
+func _recalculer_vitesse(_arg = null) -> void:
+	vitesse_marche = vitesse_marche_base + IventaireManager.obtenir_bonus_vitesse()
+	vitesse_course = vitesse_course_base + IventaireManager.obtenir_bonus_vitesse()

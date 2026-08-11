@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://defeu55y6bqgu"]
+
+[ext_resource type="Script" uid="uid://bj5iqmg5kdxti" path="res://ui/UI_objet_resu/slot_resu.gd" id="1_1iko6"]
+
+[node name="slot_resu" type="TextureButton" unique_id=276768779]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1iko6")
+
+[node name="icone" type="TextureRect" parent="." unique_id=1641372834]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="label_pourcentage" type="Button" parent="." unique_id=1730488968]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[connection signal="pressed" from="label_pourcentage" to="." method="_on_pressed"]

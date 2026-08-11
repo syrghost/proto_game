@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Bouclier" format=3 uid="uid://bbukv7ugbbs7w"]
+
+[ext_resource type="Script" uid="uid://cit161djmf4kx" path="res://Objets/Bouclier/bouclier.gd" id="1_ceqa0"]
+[ext_resource type="Texture2D" uid="uid://dbeeqy6im6v1t" path="res://icon.svg" id="1_jxks0"]
+[ext_resource type="PackedScene" uid="uid://00mg6iqmf6gr" path="res://Objets/Bouclier/scene/bouclier_test.tscn" id="2_cibb6"]
+
+[resource]
+script = ExtResource("1_ceqa0")
+scene_modele = ExtResource("2_cibb6")
+animation_bloquer = "animation_bouclier/bloquer"
+animation_parade = "animation_bouclier/parade"
+animation_dmg_blocage = "animation_bouclier/recevoir_dmg_bouclier"
+id = "bouclier"
+nom = "bouclier"
+icone = ExtResource("1_jxks0")
+type_objet = 7
+metadata/_custom_type_script = "uid://cit161djmf4kx"

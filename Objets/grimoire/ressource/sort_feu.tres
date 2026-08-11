@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Grimoire" format=3 uid="uid://bkowal4tixjky"]
+
+[ext_resource type="Script" uid="uid://do0ijbeotv0a3" path="res://Objets/grimoire/grimoire.gd" id="1_1rfis"]
+[ext_resource type="Texture2D" uid="uid://dbeeqy6im6v1t" path="res://icon.svg" id="1_b3lex"]
+[ext_resource type="PackedScene" uid="uid://b25ecnr6kao7x" path="res://Objets/grimoire/Zone_effets/Scene/sort_projectile.tscn" id="1_uqag1"]
+
+[resource]
+script = ExtResource("1_1rfis")
+nom_sort = "fire ball"
+cout_mana = 15
+degats_sort = 14
+scene_effet = ExtResource("1_uqag1")
+animation_incantation = "Lancer_sort"
+id = "sort feu"
+nom = "fire ball"
+icone = ExtResource("1_b3lex")
+type_objet = 3
+empilable = false
+quantite_max = 1
+metadata/_custom_type_script = "uid://do0ijbeotv0a3"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Armure" format=3 uid="uid://k65axiiq2loc"]
+
+[ext_resource type="Script" uid="uid://dx0j1n48kjtx1" path="res://Objets/Armure/armure.gd" id="1_6t3ny"]
+[ext_resource type="Texture2D" uid="uid://dbeeqy6im6v1t" path="res://icon.svg" id="1_n3eb8"]
+
+[sub_resource type="PackedScene" id="PackedScene_yi2ya"]
+
+[resource]
+script = ExtResource("1_6t3ny")
+defense = 9
+vitesse_bonus = 3.0
+scene_modele = SubResource("PackedScene_yi2ya")
+id = "Armure1"
+nom = "Armure1"
+icone = ExtResource("1_n3eb8")
+type_objet = 1
+quantite_max = 1
+metadata/_custom_type_script = "uid://dx0j1n48kjtx1"

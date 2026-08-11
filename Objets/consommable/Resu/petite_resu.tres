@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Resu" format=3 uid="uid://rmyg67bhv45s"]
+
+[ext_resource type="Script" uid="uid://cs8fsylx6lfds" path="res://Objets/consommable/ressource/Resu.gd" id="1_qrowy"]
+[ext_resource type="Texture2D" uid="uid://dbeeqy6im6v1t" path="res://icon.svg" id="1_xmy1q"]
+
+[resource]
+script = ExtResource("1_qrowy")
+id = "petite_resu"
+nom = "petite_resu"
+description = "la petite resu"
+icone = ExtResource("1_xmy1q")
+type_objet = 5
+metadata/_custom_type_script = "uid://cs8fsylx6lfds"

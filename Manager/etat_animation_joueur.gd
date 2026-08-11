@@ -26,8 +26,15 @@ var animation_tree : AnimationTree
 var player : CharacterBody3D
 var sprint_autoriser : bool = true
 var camera : Camera3D
-var sante_player : Node
+var sante_player : Sante
+var mana_player : Mana
 
+var indicateur_zone : Node3D = null
+var sort_zone_en_attente: Grimoire = null
+
+#----------------------------- POUR LE BOUCLIER ----------------------------------------
+var en_blocage : bool = false
+var temps_debut_blocage : float = 0.0
 
 
 func _ready() -> void:
@@ -58,7 +65,7 @@ func _physics_process(_delta: float) -> void:
 
 func mode_exploration():
 	sprint_autoriser = true
-	if en_transition :
+	if en_transition or en_blocage :
 		return
 	if player.direction:
 		if player.courir:
@@ -73,7 +80,7 @@ func mode_exploration():
 
 func mode_idle_combat():
 	sprint_autoriser = not(verrouillage_actif and cible_verrouillee)
-	if en_transition:
+	if en_transition or en_blocage:
 		return
 	if arme == null:
 		changement_d_etat(Etat.normal)
@@ -140,7 +147,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif etat_actuel == Etat.idle_combat and not (verrouillage_actif and cible_verrouillee) :
 			ranger_arme()
 	if event.is_action_pressed("Attaque") :
-		if  etat_actuel == Etat.idle_combat:
+		if  etat_actuel == Etat.idle_combat and not (arme is Baton) :
+			if en_blocage:
+				arreter_blocage()
 			player.attaque = true
 			changement_d_etat(Etat.Attaque)
 		elif etat_actuel == Etat.Attaque :
@@ -153,6 +162,132 @@ func _unhandled_input(event: InputEvent) -> void:
 		changer_cible(1)
 	if event.is_action_pressed("focus_precedent") and verrouillage_actif:
 		changer_cible(-1)
+	if event.is_action_pressed("lancer_sort"):
+		tenter_lancer_sort()
+		print("je clique")
+	if event.is_action_released("lancer_sort") and indicateur_zone :
+		valider_sort_zone()
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			SortManager.changer_sort_actif(1)
+			if SortManager.sort_actif:
+				print("Sort actif : ", SortManager.sort_actif.nom_sort)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			SortManager.changer_sort_actif(-1)
+	if event.is_action_pressed("bloquer") :
+		demarrer_blocage()
+	if event.is_action_released("bloquer"):
+		arreter_blocage()
+
+func demarrer_blocage() -> void:
+	if IventaireManager.bouclier_equipe_actuel == null:
+		return
+	if etat_actuel == Etat.Attaque or en_transition:
+		return
+	en_blocage = true
+	temps_debut_blocage = Time.get_ticks_msec() / 1000.0
+	animation.play(IventaireManager.bouclier_equipe_actuel.animation_bloquer)
+	sprint_autoriser = false
+	player.peut_bouger = false
+
+func arreter_blocage() -> void:
+	en_blocage = false
+	sprint_autoriser = true
+	player.peut_bouger = true
+
+func tenter_lancer_sort() -> void:
+	if en_transition : 
+		return
+	if arme == null or not (arme is Baton):
+		return
+	var sort = SortManager.sort_actif
+	if sort == null:
+		return
+	if mana_player.mana_actuelle < sort.cout_mana:
+		print("Pas assez de mana")
+		return
+	en_transition = true
+	player.peut_bouger = false
+
+	match sort.type_sort:
+		Grimoire.TypeSort.PROJECTILE:
+			lancer_projectile(sort)
+		Grimoire.TypeSort.ZONE:
+			demarrer_visee_zone(sort)
+
+func lancer_projectile(sort: Grimoire) -> void:
+	mana_player.consommer(sort.cout_mana)
+	animation.play(sort.animation_incantation)
+	await get_tree().create_timer(1.4).timeout
+	var projectile = sort.scene_effet.instantiate()
+	get_tree().current_scene.add_child(projectile)
+	projectile.global_position = player.point_spawm_sort.global_position
+
+	var direction_tir : Vector3
+	if verrouillage_actif and cible_verrouillee:
+		direction_tir = (cible_verrouillee.global_position - projectile.global_position).normalized()
+	else:
+		direction_tir = -player.mesh.global_transform.basis.z
+
+	projectile.lancer(direction_tir, sort.vitesse_projectile, sort.degats_sort)
+	await  animation.animation_finished
+	
+	en_transition =false
+	player.peut_bouger = true
+
+
+func demarrer_visee_zone(sort: Grimoire) -> void:
+	sort_zone_en_attente = sort
+	indicateur_zone = sort.scene_indicateur.instantiate()
+	get_tree().current_scene.add_child(indicateur_zone)
+	if indicateur_zone.has_method("definir_rayon"):
+		indicateur_zone.definir_rayon(sort.rayon_zone)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	# position initial de la zone
+	var devant_joueur = player.global_position - player.mesh.global_transform.basis.z * 3.0
+	indicateur_zone.global_position = devant_joueur
+
+
+func _process(_delta: float) -> void:
+	if indicateur_zone:
+		var pos_sol = obtenir_position_souris_sur_sol()
+		if pos_sol:
+			indicateur_zone.global_position = pos_sol
+
+func obtenir_position_souris_sur_sol() -> Vector3:
+	var pos_ecran = get_viewport().get_mouse_position()
+	var origine = camera.project_ray_origin(pos_ecran)
+	var direction = camera.project_ray_normal(pos_ecran)
+	var espace = get_viewport().world_3d.direct_space_state
+	var params = PhysicsRayQueryParameters3D.create(origine, origine + direction * 1000)
+	params.exclude = [player.get_rid()]
+	var resultat = espace.intersect_ray(params)
+	return resultat.position if resultat else player.global_position
+
+func valider_sort_zone() -> void:
+	var sort = sort_zone_en_attente
+	var pos_finale = indicateur_zone.global_position
+	indicateur_zone.queue_free()
+	indicateur_zone = null
+	
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	
+	mana_player.consommer(sort.cout_mana)
+	player.mesh.look_at(Vector3(pos_finale.x, player.position.y, pos_finale.z))
+
+	animation.play(sort.animation_incantation)
+	await animation.animation_finished
+
+	var effet = sort.scene_indicateur.instantiate()
+	get_tree().current_scene.add_child(effet)
+	effet.global_position = pos_finale
+	effet.declencher(sort.degats_sort, sort.rayon_zone)
+
+	en_transition = false
+	player.peut_bouger = true
+	sort_zone_en_attente = null
+
 func esquiver() -> void:
 	if arme == null or en_transition:
 		return
@@ -280,12 +415,13 @@ func changement_d_etat(nouvelle_etat):
 		Etat.Attaque:
 			if arme == null:
 				return
+
 			player.peut_bouger = false
 			input_attaque_en_attente = false
 			animation_tree.active = false
 			if arme.animation_combo_arme.is_empty():
 				# Pas de combo défini : attaque simple unique
-				animation.play(arme.animation_attaqe_arme, -1, arme.vitesse_attaque)
+				animation.play(arme.animation_attaque_arme, -1, arme.vitesse_attaque)
 				player.lancer_dash_attaque(1.5, 0.25)
 				
 				# activation / desactivation de la hitbox de l'arme
@@ -361,3 +497,14 @@ func changer_cible(direction: int) -> void:
 	)
 
 	cible_verrouillee = candidats[0]
+
+
+func lancer_sort_actif() -> void:
+	var sort = SortManager.sort_actif
+	if sort == null or mana_player == null:
+		return
+	if not mana_player.consommer(sort.cout_mana):
+		print("Pas assez de mana")
+		return
+	animation.play(sort.animation_incantation)
+	# instancier scene_effet en fonction du type_sort (projectile lancé devant, ou zone à la position ciblée)

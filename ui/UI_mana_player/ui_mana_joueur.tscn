@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://iedjisu4yx2y"]
+
+[ext_resource type="Script" uid="uid://dnf0bhwa3yoei" path="res://ui/UI_mana_player/mana_player.gd" id="1_d4n27"]
+
+[node name="ui_mana_joueur" type="CanvasLayer" unique_id=447342142]
+
+[node name="mana_player" type="Control" parent="." unique_id=413191655]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+script = ExtResource("1_d4n27")
+
+[node name="barre_mana" type="ProgressBar" parent="mana_player" unique_id=281413218]
+layout_mode = 1
+offset_right = 310.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0.82191056, 2.623126e-06, 7.70092e-07, 1)
+theme_override_colors/font_outline_color = Color(0.8882976, 0.15232313, 0.4882043, 1)
+metadata/_edit_use_anchors_ = true
